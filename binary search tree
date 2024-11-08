@@ -1,18 +1,65 @@
 #include <stdio.h>
-#include <malloc.h>
-struct node{
+#include <stdlib.h>
+
+struct Node {
     int data;
-    struct node* left;
-    struct node* right;
+    struct Node* left;
+    struct Node* right;
 };
-struct node* createnode(int data){
-    struct node *n;
-    n = (struct node * )malloc(sizeof(struct node));
-    n->data=data;
-    n->left=NULL;
-    n->right=NULL;
-    return n;
-    
+
+struct Node* newNode(int data) {
+    struct Node* node = (struct Node*)malloc(sizeof(struct Node));
+    node->data = data;
+    node->left = NULL;
+    node->right = NULL;
+    return node;
 }
-void preorder(struct node* root){
-    if(root!=NULL){
+
+struct Node* insert(struct Node* node, int data) {
+    if (node == NULL) {
+        return newNode(data);
+    }
+
+    if (data < node->data) {
+        node->left = insert(node->left, data);
+    } else if (data > node->data) {
+        node->right = insert(node->right, data);
+    }
+
+    return node;
+}
+
+struct Node* iterativeSearch(struct Node* root, int key) {
+    while (root != NULL) {
+        if (key == root->data) {
+            return root;
+        } else if (key < root->data) {
+            root = root->left;
+        } else {
+            root = root->right;
+        }
+    }
+    return NULL;
+}
+
+int main() {
+    struct Node* root = NULL;
+    root = insert(root, 50);
+    root = insert(root, 30);
+    root = insert(root, 20);
+    root = insert(root, 40);
+    root = insert(root, 70);
+    root = insert(root, 60);
+    root = insert(root, 80);
+
+    int key = 4;
+    struct Node* result = iterativeSearch(root, key);
+
+    if (result != NULL) {
+        printf("Key %d found.\n", key);
+    } else {
+        printf("Key %d not found.\n", key);
+    }
+
+    return 0;
+}
