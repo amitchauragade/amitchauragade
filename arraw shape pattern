@@ -1,0 +1,16 @@
+'''write a programme that reads a number N and prints
+the arrow shpae of (N*2) -1 rows using stars(*).
+Note: there is space after every star'''
+n = int(input())
+hollow_spaces_count = 0
+for row in range(0, n):
+    if row == 0:
+        print("* ")
+    elif row == n-1:
+        print("* " * n) 
+    else:
+        hollow_space = " " * hollow_spaces_count
+        row_output = "* " + hollow_space + "* "
+        print(row_output)
+        hollow_spaces_count +=2
+hollow_spaces_count -= 2
