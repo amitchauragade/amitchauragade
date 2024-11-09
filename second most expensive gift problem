@@ -1,0 +1,16 @@
+''' zoe went to a gift shop to buy a gift for her best friend. there are different kinds of gifts in the gift shop
+zoe wants to buy  a most expensive gift, but the most expensive gift are out of stock. 
+so she wants to buy her best friend second most expensive gift in the shop. find second most expensive gift in the shop.'''
+def get_second_most_expensive_gift_price(gift_prices):
+    unique_gift_prices = set(gift_prices)
+    gift_prices_list = list(unique_gift_prices)
+    gift_prices_list.sort(reverse = True)
+    if len(gift_prices_list) >= 2:
+        return gift_prices_list[1]
+    return "No gifts available"
+
+def main():
+    gift_prices = list(map(int, input().split(" ")))
+    second_most_expensive_gift_price = get_second_most_expensive_gift_price(gift_prices)
+    print(second_most_expensive_gift_price)
+main()
